@@ -1,0 +1,20 @@
+{
+    "name": "laterpay/laterpay-wordpress-plugin-extension-boilerplate",
+    "description": "This is the official LaterPay Boilerplate plugin for selling digital content with WordPress",
+    "license": "MIT",
+    "config": {
+        "vendor-dir": "laterpay-boilerplate/vendor"
+    },
+    "repositories": [
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "dev-develop#9c4de8175ce1f82813f8c9c8f11809ee6c794efc"
+    },
+    "scripts": {
+        "phpcs": "\"laterpay-boilerplate/vendor/bin/phpcs\" -s -n -p --standard=ruleset.xml --extensions=php --ignore=laterpay-boilerplate/vendor/*,laterpay-boilerplate/languages/* laterpay-boilerplate",
+        "phpcbf": "\"laterpay-boilerplate/vendor/bin/phpcbf\" --no-patch --standard=ruleset.xml --extensions=php --ignore=laterpay-boilerplate/vendor/*,laterpay-boilerplate/languages/* laterpay-boilerplate",
+        "wpcs": "\"laterpay-boilerplate/vendor/bin/phpcs\" --config-set installed_paths laterpay-boilerplate/vendor/wp-coding-standards/wpcs"
+    }
+}
