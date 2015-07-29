@@ -28,6 +28,7 @@ register_deactivation_hook( __FILE__, 'laterpay_boilerplate_deactivate' );
 function laterpay_boilerplate_init() {
     laterpay_boilerplate_before_start();
     // Write init code here
+    // E.g.: laterpay_event_dispatcher()->add_listener( 'laterpay_admin_init', 'laterpay_boilerplate_test' );
 }
 
 /**
@@ -65,7 +66,7 @@ function laterpay_boilerplate_deactivate() {
  */
 function laterpay_boilerplate_force_deactivate() {
     if ( ! is_plugin_active( 'laterpay/laterpay.php' ) ) {
-        deactivate_plugins(plugin_basename(__FILE__));
+        deactivate_plugins( plugin_basename( __FILE__ ) );
     }
 }
 
@@ -75,6 +76,7 @@ function laterpay_boilerplate_force_deactivate() {
  * @return void
  */
 function laterpay_boilerplate_before_start() {
-    $dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-    //LaterPay_AutoLoader::register_namespace( $dir . 'application', 'LaterPay' );
+    // Write init code here
+    // $dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+    // LaterPay_AutoLoader::register_namespace( $dir . 'application', 'LaterPay' );
 }
