@@ -13,6 +13,7 @@
 // Kick-off
 // Specific LaterPay hook, this plugin will work only if main plugin is loaded
 add_action( 'laterpay_ready', 'laterpay_boilerplate_init' );
+add_action( 'admin_init', 'laterpay_boilerplate_force_deactivate' );
 
 register_activation_hook( __FILE__, 'laterpay_boilerplate_activate' );
 register_deactivation_hook( __FILE__, 'laterpay_boilerplate_deactivate' );
@@ -26,7 +27,6 @@ register_deactivation_hook( __FILE__, 'laterpay_boilerplate_deactivate' );
  */
 function laterpay_boilerplate_init() {
     laterpay_boilerplate_before_start();
-    laterpay_event_dispatcher()->add_listener( 'laterpay_deactivate_after', 'laterpay_boilerplate_force_deactivate' );
     // Write init code here
 }
 
@@ -38,12 +38,7 @@ function laterpay_boilerplate_init() {
  * @return void
  */
 function laterpay_boilerplate_activate() {
-    /**
-     * Detect plugin. For use in Admin area only.
-     */
     if ( ! is_plugin_active( 'laterpay/laterpay.php' ) ) {
-        unset( $_GET['activate'] );
-        deactivate_plugins( 'laterpay-boilerplate/laterpay-boilerplate.php' );
         return;
     }
     laterpay_boilerplate_before_start();
@@ -58,7 +53,6 @@ function laterpay_boilerplate_activate() {
  * @return void
  */
 function laterpay_boilerplate_deactivate() {
-    laterpay_boilerplate_before_start();
     // Write deactivation code here
 }
 
@@ -70,7 +64,9 @@ function laterpay_boilerplate_deactivate() {
  * @return void
  */
 function laterpay_boilerplate_force_deactivate() {
-    deactivate_plugins( 'laterpay-boilerplate/laterpay-boilerplate.php' );
+    if ( ! is_plugin_active( 'laterpay/laterpay.php' ) ) {
+        deactivate_plugins(plugin_basename(__FILE__));
+    }
 }
 
 /**
@@ -80,5 +76,5 @@ function laterpay_boilerplate_force_deactivate() {
  */
 function laterpay_boilerplate_before_start() {
     $dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-    LaterPay_AutoLoader::register_namespace( $dir . 'application', 'LaterPay' );
+    //LaterPay_AutoLoader::register_namespace( $dir . 'application', 'LaterPay' );
 }
